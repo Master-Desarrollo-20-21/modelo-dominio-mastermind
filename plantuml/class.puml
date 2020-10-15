@@ -1,0 +1,89 @@
+@startuml MasterMind
+
+title MasterMind - Diagrama de clases
+
+class MasterMind
+
+together {
+    class Board
+    class CodeMaker
+    class CodeBreaker
+}
+class Player
+class Piece
+together {
+    class ColorPiece
+    class ResultPiece
+}
+
+together {
+    class SecretCode
+    class ProposedCode
+    class ResultProposedCode
+}
+
+together {
+    class putAction
+    class createAction
+}
+
+class BlackResultPiece
+class WhiteResultPiece
+class WinnerResult
+class Color
+class Code
+class ColorCode
+class Position
+
+MasterMind *--> Board
+MasterMind *--> CodeMaker
+MasterMind *--> CodeBreaker
+
+Code ^-- ColorCode
+Code ^-- ResultProposedCode
+ColorCode ^-- SecretCode
+ColorCode ^-- ProposedCode
+ColorCode o--> "5" ColorPiece
+
+Board o--> "1" SecretCode
+Board o--> "0..12" ProposedCode
+Board o--> "0..12" ResultProposedCode
+
+Player ^-- CodeMaker
+Player ^-- CodeBreaker
+CodeMaker --> "1" SecretCode
+CodeMaker ..> ResultProposedCode :"return"
+CodeBreaker --> "0..12" ProposedCode 
+ProposedCode --> "1" ResultProposedCode
+
+ResultProposedCode o--> "5" ResultPiece
+ResultProposedCode ^-- WinnerResult
+CodeBreaker --> WinnerResult
+WinnerResult --> "5" BlackResultPiece
+
+Piece ^-- ColorPiece
+Piece ^-- ResultPiece
+
+ColorPiece *--> "1" Color
+Color ^-- Blue
+Color ^-- Green
+Color ^-- Red
+Color ^-- Yellow
+Color ^-- ColorX
+
+ResultPiece ^-- BlackResultPiece
+ResultPiece ^-- WhiteResultPiece
+BlackResultPiece --> Position
+
+CodeBreaker ..> putAction 
+putAction ..> ProposedCode : target
+
+CodeMaker ..> createAction
+createAction ..> SecretCode : target
+
+Action ^-- createAction
+Action ^-- putAction
+Action ..> ColorPiece
+
+
+@enduml
