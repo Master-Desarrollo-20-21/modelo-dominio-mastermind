@@ -1,0 +1,20 @@
+@startuml
+
+Mastermind *-- Rules
+Mastermind *-- Board
+Mastermind o-- "n" Piece
+Mastermind o-- "2" Player
+
+Board *-- PlayZone
+Board *-- ClueZone
+Board *-- Shield : Zona de código secreto
+
+PlayZone *-- "10" Row
+ClueZone *-- "10" Row
+Row *-- "4" Slot
+
+Shield *-- "4" Slot
+
+
+
+@enduml
