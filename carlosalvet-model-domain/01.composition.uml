@@ -2,12 +2,12 @@
 
 Mastermind *-- Rules
 Mastermind *-- Board
-Mastermind *-- "n" Piece
-Mastermind *-- "2" Player
+Mastermind o-- "n" Piece
+Mastermind o-- "2" Player
 
 Board *-- PlayZone
 Board *-- ClueZone
-Board *-- Shield
+Board *-- Shield : Zona de código secreto
 
 PlayZone *-- "10" Row
 ClueZone *-- "10" Row
