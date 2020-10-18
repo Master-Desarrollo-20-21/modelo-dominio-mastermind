@@ -2,7 +2,7 @@ MasterMind: modelo del dominio
 ----
 
 ### Diagrama de clases
-![Clases](out/plantuml/class/MasterMind.png)
+![Clases](out/plantuml/class/MasterMind_v1.png)
 
 # Cambios propuestos
 
