@@ -6,10 +6,18 @@ class MasterMind
 
 together {
     class Board
+    class Turn
+    class Score
+    class Player
+}
+
+class Player
+
+together {
     class CodeMaker
     class CodeBreaker
+    class Code
 }
-class Player
 class Piece
 together {
     class ColorPiece
@@ -31,13 +39,13 @@ class BlackResultPiece
 class WhiteResultPiece
 class WinnerResult
 class Color
-class Code
+
 class ColorCode
 class Position
 
 MasterMind *--> Board
-MasterMind *--> CodeMaker
-MasterMind *--> CodeBreaker
+MasterMind --> "1" Turn
+Turn *--> "2" Player
 
 Code ^-- ColorCode
 Code ^-- ResultProposedCode
@@ -51,9 +59,10 @@ Board o--> "0..12" ResultProposedCode
 
 Player ^-- CodeMaker
 Player ^-- CodeBreaker
+Player *--> Score
 CodeMaker --> "1" SecretCode
 CodeMaker ..> ResultProposedCode :"return"
-CodeBreaker --> "0..12" ProposedCode 
+CodeBreaker --> "0..12" ProposedCode
 ProposedCode --> "1" ResultProposedCode
 
 ResultProposedCode o--> "5" ResultPiece
@@ -75,7 +84,7 @@ ResultPiece ^-- BlackResultPiece
 ResultPiece ^-- WhiteResultPiece
 BlackResultPiece --> Position
 
-CodeBreaker ..> putAction 
+CodeBreaker ..> putAction
 putAction ..> ProposedCode : target
 
 CodeMaker ..> createAction
