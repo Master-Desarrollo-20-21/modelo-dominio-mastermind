@@ -8,7 +8,9 @@ together {
     class Board
     class Turn
     class Score
+    class Player
 }
+
 class Player
 
 together {
@@ -43,12 +45,7 @@ class Position
 
 MasterMind *--> Board
 MasterMind --> "1" Turn
-MasterMind *--> "2" Player
-MasterMind *--> "2" Score
 Turn *--> "2" Player
-
-Score <--* CodeMaker
-Score <--* CodeBreaker
 
 Code ^-- ColorCode
 Code ^-- ResultProposedCode
@@ -62,6 +59,7 @@ Board o--> "0..12" ResultProposedCode
 
 Player ^-- CodeMaker
 Player ^-- CodeBreaker
+Player *--> Score
 CodeMaker --> "1" SecretCode
 CodeMaker ..> ResultProposedCode :"return"
 CodeBreaker --> "0..12" ProposedCode
